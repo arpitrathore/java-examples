@@ -10,42 +10,41 @@ public abstract class WordCountUtility {
   /**
    * Gets count of characters, words and lines from a file
    *
-   * @param fileName the file name
-   * @param switchLines whether to get lines count
-   * @param switchWords whether to get words count
-   * @param switchCharacters whether to get characters count
+   * @param filePath        the file path
+   * @param countLines      whether to get lines count
+   * @param countWords      whether to get words count
+   * @param countCharacters whether to get characters count
    * @return String representation of count of characters, words and lines
    * @throws IOException if unable to read file
    */
-  public static String getCount(
-      String fileName, boolean switchLines, boolean switchWords, boolean switchCharacters)
-      throws IOException {
+  public static String getCount(final String filePath, boolean countLines, boolean countWords,
+      boolean countCharacters) throws IOException {
     var result = new StringBuilder();
-    var bytes = Files.readAllBytes(Path.of(fileName));
+    var bytes = Files.readAllBytes(Path.of(filePath));
 
-    var switchAll = (switchCharacters == switchLines) && (switchLines == switchWords);
+    var switchAll = (countCharacters == countLines) && (countLines == countWords);
     if (switchAll) {
-      switchCharacters = true;
-      switchLines = true;
-      switchWords = true;
+      countCharacters = true;
+      countLines = true;
+      countWords = true;
     }
 
-    if (switchLines) {
+    if (countLines) {
       int linesCount = calculateLinesCount(bytes);
       result.append("\t").append(linesCount);
     }
 
-    if (switchWords) {
+    if (countWords) {
       int wordsCount = calculateWordsCount(bytes);
       result.append("\t").append(wordsCount);
     }
 
-    if (switchCharacters) {
+    if (countCharacters) {
       int charCount = calculateCharsCount(bytes);
       result.append("\t").append(charCount);
     }
 
-    result.append(" ").append(fileName);
+    result.append(" ").append(filePath);
     return result.toString();
   }
 
@@ -55,8 +54,8 @@ public abstract class WordCountUtility {
 
   private static int calculateLinesCount(byte[] bytes) {
     var count = 0;
-    for (byte byte2 : bytes) {
-      if (byte2 == '\n') {
+    for (byte byt : bytes) {
+      if (byt == '\n') {
         count++;
       }
     }

@@ -16,20 +16,20 @@ class Application implements Callable<String> {
   @CommandLine.Option(
       names = {"-c"},
       description = "-c for counting characters")
-  private boolean switchCharacters;
+  private boolean countCharacters;
 
   @CommandLine.Option(
       names = {"-l"},
       description = "-l for counting lines")
-  private boolean switchLines;
+  private boolean countLines;
 
   @CommandLine.Option(
       names = {"-w"},
       description = "-w for counting words")
-  private boolean switchWords;
+  private boolean countWords;
 
   @CommandLine.Parameters(index = "0", description = "The file to calculate for.")
-  private String fileName;
+  private String filePath;
 
   public static void main(String[] args) {
     var cmd = new CommandLine(new Application());
@@ -42,10 +42,10 @@ class Application implements Callable<String> {
 
   @Override
   public String call() throws Exception {
-    if (!new File(this.fileName).exists()) {
-      throw new FileNotFoundException("File " + this.fileName + " does not exist");
+    if (!new File(this.filePath).exists()) {
+      throw new FileNotFoundException("File " + this.filePath + " does not exist");
     }
     return WordCountUtility.getCount(
-        this.fileName, this.switchLines, this.switchWords, this.switchCharacters);
+        this.filePath, this.countLines, this.countWords, this.countCharacters);
   }
 }

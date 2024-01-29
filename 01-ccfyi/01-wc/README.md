@@ -9,13 +9,13 @@ sudo cp ./target/ccwc /usr/local/bin/
 ### 3. Usage
 ```sh
 $ ccwc -l test.txt
-        7142 test.txt
+        506 test.txt
 $ ccwc -w test.txt
-        58164 test.txt
+        4509 test.txt
 $ ccwc -c test.txt
-        334996 test.txt
+        25953 test.txt
 $ ccwc test.txt
-        7142    58164   334996 test.txt
+        506    4509   25953 test.txt
 ```
 
 ### 4. Help
